@@ -1,0 +1,18 @@
+import numpy as np 
+import random
+
+data=np.load('train_z.npy')
+z=np.zeros(shape=(64,200))
+
+num=0
+for ii in range(64):
+	for jj in range(200):
+		n=random.randint(0,1)
+		if n==0:
+			z[ii,jj]=data[0,jj]
+			num=num+1
+		elif n==1:
+			z[ii,jj]=data[ii,jj]
+
+np.save('new_z.npy',z)
+print num

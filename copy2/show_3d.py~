@@ -1,0 +1,41 @@
+import numpy as np 
+import matplotlib.pyplot as plt 
+from mpl_toolkits.mplot3d import Axes3D
+
+cols=1
+
+figure,axes=plt.subplots(ncols=10,nrows=2)
+print axes.shape
+
+
+
+ori=np.load('train_out.npy').reshape((64,32,32,32))
+new=np.load('new_out.npy').reshape((64,32,32,32))
+
+
+
+for ii in range(cols):
+	print ii
+	X1=[]
+	Y1=[]
+	Z1=[]
+	X2=[]
+	Y2=[]
+	Z2=[]
+	for ll in range(32):
+		for mm in range(32):
+			for nn in range(32):
+				if ori[ii,ll,mm,nn]>=0.5:
+					X1.append(ll)
+					Y1.append(mm)
+					Z1.append(nn)
+				if new[ii,ll,mm,nn]>=0.5:
+					X2.append(ll)
+					Y2.append(mm)
+					Z2.append(nn)
+	ax1=plt.subplot(2,cols,ii+1,projection='3d')
+	ax1.scatter(X1,Y1,Z1)
+	ax2=plt.subplot(2,cols,cols+ii+1,projection='3d')
+	ax2.scatter(X2,Y2,Z2)
+
+plt.show()
